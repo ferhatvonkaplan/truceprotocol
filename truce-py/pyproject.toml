@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "truce"
+version = "0.1.0"
+description = "TATF reference implementation — local agent trust scoring"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+authors = [
+    { name = "TRUCE Protocol", email = "dev@truceprotocol.com" },
+]
+keywords = ["ai", "agents", "trust", "scoring", "tatf", "a2a"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Security",
+]
+dependencies = [
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+crypto = ["PyNaCl>=1.5.0"]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]
+
+[project.urls]
+Homepage = "https://github.com/truceprotocol/truce-py"
+Documentation = "https://tatf.dev"
+Repository = "https://github.com/truceprotocol/truce-py"
+Specification = "https://github.com/truceprotocol/tatf"
+
+[tool.setuptools.packages.find]
+include = ["truce*"]
