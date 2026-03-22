@@ -20,7 +20,10 @@ jobs:
         run: cd benchmarks && python generate_benchmark.py --agents 100 --output datasets/test_run.jsonl
 
       - name: Evaluate benchmark
-        run: cd benchmarks && python evaluate.py --dataset datasets/test_run.jsonl --output evaluation/test_results.json
+        run: |
+          cd benchmarks
+          mkdir -p evaluation
+          python evaluate.py --dataset datasets/test_run.jsonl --output evaluation/test_results.json
 
       - name: Print accuracy
         shell: python
