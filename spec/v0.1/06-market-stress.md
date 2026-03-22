@@ -288,13 +288,13 @@ A TATF-conformant AVX implementation MUST:
 
 ## Appendix: Reference Implementation
 
-A reference implementation of TATF v0.1 is under development:
+A reference implementation of TATF v0.1 is available:
 
 ```
-pip install truce          # coming soon
+pip install tatf
 ```
 
-The reference implementation will include:
+The reference implementation includes:
 - Local scoring engine (offline capable)
 - All six KYA-B dimensions
 - ALPHA composite scoring

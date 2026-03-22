@@ -33,16 +33,18 @@ Layer 1: OBSERVABLE METRICS       Objective, measurable behavior
 ## Quick Start
 
 ```python
-pip install truce          # coming soon — see truceprotocol/truce-py
+pip install tatf
 
-from truce import TruceClient
+from truce import TATFScorer, Transaction
+from datetime import datetime, timezone
 
-client = TruceClient()
-score = client.score_agent("agent-123", sector="electronics")
+scorer = TATFScorer()
+scorer.ingest("agent-123", transactions)
 
-print(score.alpha)           # 0.72
-print(score.routing)         # AUTO_PASS
-print(score.confidence)      # (0.65, 0.79)
+result = scorer.score("agent-123")
+print(result.score)        # 0.875
+print(result.routing)      # AUTO_PASS
+print(result.confidence)   # (0.7567, 0.9933)
 ```
 
 ## Specification

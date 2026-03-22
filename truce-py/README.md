@@ -11,10 +11,10 @@ Score autonomous agents locally using the [TRUCE Agent Trust Framework (TATF)](h
 ## Install
 
 ```bash
-pip install truce
+pip install tatf
 
 # With Ed25519 attestation signing:
-pip install truce[crypto]
+pip install tatf[crypto]
 ```
 
 ## Quick Start
