@@ -23,7 +23,13 @@ jobs:
         run: cd benchmarks && python evaluate.py --dataset datasets/test_run.jsonl --output evaluation/test_results.json
 
       - name: Print accuracy
-        run: python -c "import json; r=json.load(open('benchmarks/evaluation/test_results.json')); print(f'Accuracy: {r.get(\"accuracy\", \"N/A\")}')"
+        shell: python
+        run: |
+          import json
+          with open('benchmarks/evaluation/test_results.json') as f:
+              r = json.load(f)
+          acc = r.get('accuracy', 'N/A')
+          print(f'Accuracy: {acc}')
 
   lint:
     runs-on: ubuntu-latest
