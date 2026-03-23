@@ -232,6 +232,21 @@ python evaluate.py --dataset datasets/benchmark_v0.1.jsonl --verbose
 
 ---
 
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Why TATF?](docs/WHY_TATF.md) | Positioning, comparisons, and design rationale |
+| [Integration Guide](docs/INTEGRATION_GUIDE.md) | Step-by-step developer guide with code examples |
+| [Examples](examples/) | 6 runnable Python examples (scoring, anomaly, AVX, attestation, MCP pattern) |
+| [FAQ](FAQ.md) | Frequently asked questions |
+| [Changelog](CHANGELOG.md) | Release history |
+| [Security Policy](SECURITY.md) | Vulnerability reporting and responsible disclosure |
+| [Governance](GOVERNANCE.md) | Decision process, roles, versioning |
+| [Contributing](CONTRIBUTING.md) | How to contribute, RFC process |
+
+---
+
 ## Contributing
 
 We welcome contributions. See [CONTRIBUTING.md](CONTRIBUTING.md).
