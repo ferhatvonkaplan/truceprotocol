@@ -35,7 +35,7 @@ Look for issues labeled `good first issue` — these are scoped, well-defined ta
 - Contribute evaluation metrics and analysis
 
 ### Reference Implementations
-- The Python reference implementation lives at [truce-py](https://github.com/truceprotocol/truce-py)
+- The Python reference implementation lives at [truce-py](https://github.com/ferhatvonkaplan/truceprotocol/tree/main/truce-py)
 - Submit implementations in any language
 - Include benchmark evaluation results
 - Document any deviations from the spec
@@ -50,7 +50,7 @@ Look for issues labeled `good first issue` — these are scoped, well-defined ta
 
 ```bash
 # Clone the repository
-git clone https://github.com/truceprotocol/tatf.git
+git clone https://github.com/ferhatvonkaplan/truceprotocol.git
 cd tatf
 
 # Generate benchmark data
@@ -67,8 +67,8 @@ python evaluate.py --dataset datasets/my_dataset.jsonl --verbose
 pip install tatf
 
 # Or from source
-git clone https://github.com/truceprotocol/truce-py.git
-cd truce-py
+git clone https://github.com/ferhatvonkaplan/truceprotocol.git
+cd truceprotocol/truce-py
 pip install -e ".[dev,crypto]"
 pytest tests/ -v
 ```

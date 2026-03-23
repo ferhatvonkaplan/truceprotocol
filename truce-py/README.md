@@ -3,10 +3,10 @@
 **TATF reference implementation — local agent trust scoring.**
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Spec](https://img.shields.io/badge/spec-TATF_v0.1-orange.svg)](https://github.com/truceprotocol/tatf)
+[![Spec](https://img.shields.io/badge/spec-TATF_v0.1-orange.svg)](https://github.com/ferhatvonkaplan/truceprotocol)
 [![Tests](https://img.shields.io/badge/tests-44_passed-green.svg)]()
 
-Score autonomous agents locally using the [TRUCE Agent Trust Framework (TATF)](https://github.com/truceprotocol/tatf) — no server required.
+Score autonomous agents locally using the [TRUCE Agent Trust Framework (TATF)](https://github.com/ferhatvonkaplan/truceprotocol) — no server required.
 
 ## Install
 
@@ -140,7 +140,7 @@ No single dimension can trigger HARD_BLOCK alone.
 
 ## Specification
 
-This library implements [TATF v0.1](https://github.com/truceprotocol/tatf):
+This library implements [TATF v0.1](https://github.com/ferhatvonkaplan/truceprotocol):
 
 - Protocol-agnostic (works with A2A, ACP, MCP, or any agent protocol)
 - Relative scoring (agents scored against their OWN baseline)
