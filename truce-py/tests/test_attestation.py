@@ -10,7 +10,7 @@ import json
 
 import pytest
 
-from truce import TATFScorer, TATFAttestor
+from tatf import TATFScorer, TATFAttestor
 
 
 def _scored_agent():
@@ -31,7 +31,7 @@ class TestAttestationFormat:
         att = attestor.attest(alpha, anomaly)
 
         assert "spec_version" in att
-        assert att["spec_version"] == "tatf-v0.1"
+        assert att["spec_version"] == "tatf-v1.0.0"
         assert "attestation_id" in att
         assert att["attestation_id"].startswith("ATT-")
         assert "issuer" in att

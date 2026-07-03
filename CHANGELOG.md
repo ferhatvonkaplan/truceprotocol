@@ -7,6 +7,40 @@ TATF uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html) for the spe
 
 ---
 
+## [1.0.0] — 2026-07-04
+
+### Added
+
+**Specification (2 new documents; 9 total)**
+- `07-signal-aggregation.md` — External-signal contract: normalisation,
+  fusion algorithm, missing-signal neutral fallback, stale-signal detection,
+  connector architecture.
+- `08-regulatory-mapping.md` — EU AI Act (Art. 13/14/15) + GDPR Art. 25
+  crosswalk, NIST AI RMF and ISO/IEC 42001 mappings. Non-overclaiming: maps
+  *to* regulations, does not constitute legal compliance.
+
+**Extended ALPHA model**
+- Fifth component `XS` (external signals), defaulting to neutral when absent.
+- Scorer `profile`: `core` (internal signals only) vs `aggregator`.
+
+**Reference implementation**
+- `SignalAggregator` — fuses third-party signals into the XS component.
+- Attestations now emit profile, applied weights, and signal provenance.
+
+### Changed
+
+- **Import package renamed `truce` → `tatf`** to resolve a name collision
+  (an unrelated `truce` exists on PyPI). Use `from tatf import TATFScorer`.
+- Attestation spec version bumped to `tatf-v1.0.0`.
+
+### Fixed
+
+- README benchmark badge no longer presents synthetic routing accuracy (97%)
+  as a headline capability claim; real-data validation (Pearson 0.69 on the
+  Bitcoin OTC Trust Network) is now reported alongside it.
+
+---
+
 ## [0.1.0] — 2026-03-21
 
 ### Added

@@ -7,7 +7,7 @@ Reference implementation of TATF v0.1 spec:
   - ATBF zone routing
 
 Usage:
-    from truce import TATFScorer
+    from tatf import TATFScorer
 
     scorer = TATFScorer()
     scorer.ingest("agent-123", transactions)

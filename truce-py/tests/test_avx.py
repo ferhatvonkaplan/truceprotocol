@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from truce import AVXCalculator, AVXEvent
+from tatf import AVXCalculator, AVXEvent
 
 
 def _now():
@@ -155,4 +155,4 @@ class TestEdgeCases:
         calc = AVXCalculator(k_anonymity_min=5)
         calc.ingest("test", _make_events(n_firms=5))
         result = calc.compute("test")
-        assert result.spec_version == "tatf-v0.1"
+        assert result.spec_version == "tatf-v1.0.0"

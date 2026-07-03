@@ -35,10 +35,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/truceprotocol/truce-py"
+Homepage = "https://github.com/ferhatvonkaplan/truceprotocol"
 Documentation = "https://tatf.dev"
-Repository = "https://github.com/truceprotocol/truce-py"
-Specification = "https://github.com/truceprotocol/tatf"
+Repository = "https://github.com/ferhatvonkaplan/truceprotocol"
+Specification = "https://github.com/ferhatvonkaplan/truceprotocol/tree/main/tatf/spec"
 
 [tool.setuptools.packages.find]
-include = ["truce*"]
+include = ["tatf*"]

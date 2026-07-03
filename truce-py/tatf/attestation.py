@@ -1,11 +1,15 @@
 """TATF Trust Attestation — Cryptographic attestation generation.
 
-Reference implementation of TATF spec v0.1 §04.
+Reference implementation of TATF spec v1.0 §04. Emits the v1.0 payload:
+the five-component ALPHA breakdown (external_signals included for
+aggregator-profile scores), the applied weight vector and profile, and a
+signal-provenance block recording which external-signal categories
+contributed to the score.
 
 Supports TATF Native format. W3C VC format is a TODO for v0.2.
 
 Signing requires PyNaCl (optional dependency):
-    pip install truce[crypto]
+    pip install tatf[crypto]
 """
 
 from __future__ import annotations
@@ -16,7 +20,7 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Optional
 
-from .models import AlphaScore, AnomalyScore
+from .models import AlphaScore, AnomalyScore, ScorerProfile
 
 
 def _canonical_json(obj: Any) -> bytes:
@@ -49,7 +53,7 @@ class TATFAttestor:
         Human-readable issuer name.
     private_key_seed : bytes, optional
         32-byte Ed25519 seed. If None, a random keypair is generated.
-        Requires PyNaCl: ``pip install truce[crypto]``
+        Requires PyNaCl: ``pip install tatf[crypto]``
     validity_hours : float
         How long attestations remain valid. Default 1.0.
     """
@@ -99,8 +103,19 @@ class TATFAttestor:
         att_id = f"ATT-{secrets.token_hex(8)}"
 
         # Build payload.
+        components: Dict[str, Any] = {
+            "agent_trust": alpha.components.agent_trust,
+            "market_stability": alpha.components.market_stability,
+            "transaction_history": alpha.components.transaction_history,
+            "counterparty_score": alpha.components.counterparty_score,
+        }
+        # v1.0: aggregator-profile scores carry the fifth (external signals)
+        # component; core-profile scores leave it unset.
+        if alpha.components.external_signals is not None:
+            components["external_signals"] = alpha.components.external_signals
+
         payload: Dict[str, Any] = {
-            "spec_version": "tatf-v0.1",
+            "spec_version": "tatf-v1.0.0",
             "attestation_id": att_id,
             "issuer": {
                 "id": self._issuer_id,
@@ -117,13 +132,18 @@ class TATFAttestor:
                 "observation_count": alpha.observation_count,
                 "cold_start": alpha.cold_start,
             },
-            "components": {
-                "agent_trust": alpha.components.agent_trust,
-                "market_stability": alpha.components.market_stability,
-                "transaction_history": alpha.components.transaction_history,
-                "counterparty_score": alpha.components.counterparty_score,
-            },
+            "profile": alpha.profile.value,
+            "weights": alpha.weights,
+            "components": components,
         }
+
+        # v1.0 §04: signal provenance — record which external-signal categories
+        # contributed to the score so a consumer can audit the aggregation.
+        if alpha.profile == ScorerProfile.AGGREGATOR or alpha.xs_coverage:
+            payload["signal_provenance"] = {
+                "xs_coverage": alpha.xs_coverage,
+                "signals_count": alpha.signals_count,
+            }
 
         # Anomaly breakdown (optional but SHOULD include).
         if anomaly:
@@ -185,7 +205,7 @@ class TATFAttestor:
         try:
             from nacl.signing import VerifyKey
         except ImportError:
-            raise ImportError("PyNaCl required for verification: pip install truce[crypto]")
+            raise ImportError("PyNaCl required for verification: pip install tatf[crypto]")
 
         proof = attestation.get("proof", {})
         sig_hex = proof.get("signature", "")

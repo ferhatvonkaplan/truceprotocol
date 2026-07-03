@@ -1,12 +1,16 @@
-# truce
+# tatf
 
 **TATF reference implementation — local agent trust scoring.**
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Spec](https://img.shields.io/badge/spec-TATF_v0.1-orange.svg)](https://github.com/ferhatvonkaplan/truceprotocol)
-[![Tests](https://img.shields.io/badge/tests-44_passed-green.svg)]()
+[![Spec](https://img.shields.io/badge/spec-TATF_v1.0-8b5cf6.svg)](https://github.com/ferhatvonkaplan/truceprotocol)
+[![Tests](https://img.shields.io/badge/tests-58_passed-brightgreen.svg)]()
 
 Score autonomous agents locally using the [TRUCE Agent Trust Framework (TATF)](https://github.com/ferhatvonkaplan/truceprotocol) — no server required.
+
+```python
+from tatf import TATFScorer
+```
 
 ## Install
 
@@ -20,7 +24,7 @@ pip install tatf[crypto]
 ## Quick Start
 
 ```python
-from truce import TATFScorer, Transaction
+from tatf import TATFScorer, Transaction
 from datetime import datetime, timezone
 
 scorer = TATFScorer()
@@ -53,7 +57,7 @@ print(result.cold_start)   # False
 Score a new transaction against the agent's behavioral baseline:
 
 ```python
-from truce import RoutingDecision
+from tatf import RoutingDecision
 
 # Normal transaction
 normal = scorer.compute_anomaly(
@@ -86,7 +90,7 @@ print(suspicious.dimensions) # Per-dimension breakdown
 ## Market Stress (AVX)
 
 ```python
-from truce import AVXCalculator, AVXEvent
+from tatf import AVXCalculator, AVXEvent
 
 avx = AVXCalculator(k_anonymity_min=5)
 
@@ -107,7 +111,7 @@ if result:  # None if k-anonymity not satisfied
 ## Trust Attestations
 
 ```python
-from truce import TATFAttestor
+from tatf import TATFAttestor
 
 attestor = TATFAttestor(issuer_id="my-scorer")
 
@@ -140,12 +144,15 @@ No single dimension can trigger HARD_BLOCK alone.
 
 ## Specification
 
-This library implements [TATF v0.1](https://github.com/ferhatvonkaplan/truceprotocol):
+This library implements [TATF v1.0](https://github.com/ferhatvonkaplan/truceprotocol):
 
 - Protocol-agnostic (works with A2A, ACP, MCP, or any agent protocol)
 - Relative scoring (agents scored against their OWN baseline)
 - Privacy-preserving (k-anonymity on aggregate metrics)
 - Incrementally adoptable (implement layers independently)
+- External signal aggregation (v1.0 §07) — fuse third-party signals
+  (prompt-injection, governance, runtime-threat) into the XS component
+  via `SignalAggregator`
 
 ## License
 

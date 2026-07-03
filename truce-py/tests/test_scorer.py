@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from truce import (
+from tatf import (
     TATFScorer,
     Transaction,
     RoutingDecision,

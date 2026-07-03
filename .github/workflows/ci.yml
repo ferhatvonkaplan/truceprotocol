@@ -37,10 +37,10 @@ jobs:
 
       - name: Check spec files exist
         run: |
-          for f in 00-introduction 01-scoring-model 02-behavioral-baselines 03-anomaly-detection 04-trust-attestation 05-adversarial-testing 06-market-stress; do
-            test -f "spec/v0.1/${f}.md" || (echo "MISSING: spec/v0.1/${f}.md" && exit 1)
+          for f in 00-introduction 01-scoring-model 02-behavioral-baselines 03-anomaly-detection 04-trust-attestation 05-adversarial-testing 06-market-stress 07-signal-aggregation 08-regulatory-mapping; do
+            test -f "spec/v1.0/${f}.md" || (echo "MISSING: spec/v1.0/${f}.md" && exit 1)
           done
-          echo "All 7 spec files present."
+          echo "All 9 v1.0 spec files present."
 
   truce-py-test:
     name: truce-py (Python ${{ matrix.python-version }})
